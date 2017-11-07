@@ -1,0 +1,26 @@
+IDIR =../include
+CC=g++
+CFLAGS=-I$(IDIR) -g -Wall -std=c++11 -pthread
+
+ODIR=obj
+LDIR =../lib
+
+LIBS=-lm
+
+_DEPS = Instance.hpp MSocket.hpp
+DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
+
+_OBJ = ircbutt.o Instance.o MSocket.o
+OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+
+
+$(ODIR)/%.o: %.cpp $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+ircbutt: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+
+.PHONY: clean
+
+clean:
+	rm -f $(ODIR)/*.o *~ core $(IDIR)/*~ 
