@@ -15,10 +15,9 @@ int main()
     
     cin >> x;
 
-    irc.join("#starladder_cs_en");
+    irc.join("#japaneseprintmaking");
     
     cin >> x;
 
     return 0;
 }
-3

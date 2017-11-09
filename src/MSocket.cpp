@@ -54,9 +54,28 @@ int MSocket::Msend(string msg)
 
 string MSocket::Mrecv()
 {
-    int bytes_read = recv(sockfd, recv_buffer, 1000, 0);
-    recv_buffer[bytes_read-2] = '\0';
+    //string to_return = "";
 
+    int bytes_read = recv(sockfd, recv_buffer, 39950, 0);
+    //to_return = recv_buffer;
+
+    /*
+    while(to_return.substr(bytes_read-2, 2) != "\r\n")
+    {
+	cout << "!!!" << recv_buffer << endl;
+	cout << "##################################### " << to_return.substr(to_return.length()-2, 2) << endl;
+	bytes_read = recv(sockfd, recv_buffer, 1000, 0);
+	cout << "to_return " << to_return.length() << " -> ";
+	to_return += recv_buffer;
+	cout << to_return.length() << endl;
+    }
+    */
+
+    //to_return.pop_back();
+    //to_return.pop_back();
+    
+    recv_buffer[bytes_read-2] = '\0';
+	
     cout << "recieved: \"" << recv_buffer << '\"' << endl;;
     return recv_buffer;
 }

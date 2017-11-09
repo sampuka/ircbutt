@@ -1,6 +1,9 @@
 //http://www.linuxhowtos.org/C_C++/socket.htm
 //http://beej.us/guide/bgnet/output/html/multipage/syscalls.html#getaddrinfo
 
+#ifndef MSOCKET_H
+#define MSOCKET_H
+
 #include <string>
 
 #include <sys/types.h>
@@ -22,5 +25,7 @@ private:
     struct addrinfo hints;
     struct addrinfo *res;
     int sockfd;
-    char recv_buffer[1028];
+    char recv_buffer[40000];
 };
+
+#endif

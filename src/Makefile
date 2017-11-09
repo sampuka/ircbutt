@@ -7,10 +7,10 @@ LDIR =../lib
 
 LIBS=-lm
 
-_DEPS = Instance.hpp MSocket.hpp
+_DEPS = Instance.hpp MSocket.hpp Message.hpp PING.hpp PRIVMSG.hpp JOIN.hpp
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = ircbutt.o Instance.o MSocket.o
+_OBJ = ircbutt.o Instance.o MSocket.o Message.o PING.o PRIVMSG.o JOIN.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
