@@ -27,12 +27,12 @@ PART::~PART()
 {
 }
 
-string getSendString()
+string PART::getSendString()
 {
     return "";
 }
 
-string getPrintString()
+string PART::getPrintString()
 {
     return username + " left " + channel;
 }

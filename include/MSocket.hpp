@@ -25,7 +25,7 @@ private:
     struct addrinfo hints;
     struct addrinfo *res;
     int sockfd;
-    char recv_buffer[40000];
+    char recv_buffer[100000];
 };
 
 #endif

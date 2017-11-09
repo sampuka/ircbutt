@@ -56,7 +56,7 @@ string MSocket::Mrecv()
 {
     //string to_return = "";
 
-    int bytes_read = recv(sockfd, recv_buffer, 39950, 0);
+    int bytes_read = recv(sockfd, recv_buffer, 99950, 0);
     //to_return = recv_buffer;
 
     /*
@@ -74,8 +74,8 @@ string MSocket::Mrecv()
     //to_return.pop_back();
     //to_return.pop_back();
     
-    recv_buffer[bytes_read-2] = '\0';
+    recv_buffer[bytes_read] = '\0';
 	
-    cout << "recieved: \"" << recv_buffer << '\"' << endl;;
+    //cout << "recieved: \"" << recv_buffer << '\"' << endl;;
     return recv_buffer;
 }

@@ -15,7 +15,7 @@ int main()
     
     cin >> x;
 
-    irc.join("#japaneseprintmaking");
+    irc.join("#denferok");
     
     cin >> x;
 

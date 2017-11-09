@@ -3,6 +3,7 @@
 #include "PING.hpp"
 #include "PRIVMSG.hpp"
 #include "JOIN.hpp"
+#include "PART.hpp"
 
 #include <string>
 #include <sstream>
@@ -55,25 +56,35 @@ void Instance::main_loop()
 
     while(true)
     {
-	recv_string = sock->Mrecv();
-
+	while(recv_string == "")
+	    recv_string = sock->Mrecv();
+	
 	interpret_msg(recv_string);
+	recv_string = "";
     }
     
 }
 
 void Instance::interpret_msg(string msg)
 {
+    
     stringstream ss(msg);
     string s;
     while(ss.good())
-    {
+    {	
 	getline(ss, s, '\n');
+
+	if(s == "")
+	    return;
+	
+	s.pop_back();
+
 	
 	while(list_busy)
 	    ;
 	list_busy = 1;
-
+    
+    
 	if(s == "PING :tmi.twitch.tv")
 	    msg_list.push_back(new PING(s));
 
@@ -84,10 +95,10 @@ void Instance::interpret_msg(string msg)
 	    msg_list.push_back(new JOIN(s));
 
 	else if(s.find(".tmi.twitch.tv PART ") != string::npos)
-	    msg_list.push_back(new JOIN(s));
+	    msg_list.push_back(new PART(s));
 
 	else
-	    cout << "didn't understand" << endl; 
+	    cout << "!!!\"" << s << "\"" << endl;
 
 	list_busy = 0;
     }
@@ -98,6 +109,7 @@ void Instance::handle_loop()
     Message* msg = NULL;
 
     while(1)
+    {
 	if(msg_list.size() > 0)
 	{
 	    while(list_busy)
@@ -135,5 +147,6 @@ void Instance::handle_loop()
 
 	    delete msg;
 	}
+    }
 }
 
