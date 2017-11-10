@@ -4,6 +4,7 @@
 #include "PRIVMSG.hpp"
 #include "JOIN.hpp"
 #include "PART.hpp"
+#include "MODE.hpp"
 
 #include <string>
 #include <sstream>
@@ -97,6 +98,9 @@ void Instance::interpret_msg(string msg)
 	else if(s.find(".tmi.twitch.tv PART ") != string::npos)
 	    msg_list.push_back(new PART(s));
 
+        else if(s.find(":jtv MODE ") != string::npos)
+	    msg_list.push_back(new MODE(s));
+
 	else
 	    cout << "!!!\"" << s << "\"" << endl;
 
@@ -127,17 +131,22 @@ void Instance::handle_loop()
 		break;
 
 	    case MessageType::PRIVMSG:
-		//sock->Msend(msg->getSendString());
+		sock->Msend(msg->getSendString());
 		cout << msg->getPrintString() << endl;
 		break;
 
 	    case MessageType::JOIN:
-		//sock->Msend(msg->getSendString());
+		sock->Msend(msg->getSendString());
 		cout << msg->getPrintString() << endl;
 		break;
 
 	    case MessageType::PART:
-		//sock->Msend(msg->getSendString());
+		sock->Msend(msg->getSendString());
+		cout << msg->getPrintString() << endl;
+		break;
+
+	    case MessageType::MODE:
+		sock->Msend(msg->getSendString());
 		cout << msg->getPrintString() << endl;
 		break;
 

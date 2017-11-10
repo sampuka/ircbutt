@@ -2,6 +2,7 @@
 #define PRIVMSG_H
 
 #include "Message.hpp"
+#include "Badges.hpp"
 
 #include <string>
 
@@ -15,7 +16,7 @@ public:
 
 private:
     void print_contents();
-    std::string badges;
+    Badges* badges;
     std::string bits;
     std::string color;
     std::string display_name;

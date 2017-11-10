@@ -51,7 +51,8 @@ enum class MessageType
 	USERNOTICE,
 	USERSTATE,
 	ROOMSTATE,
-	HOSTTARGET
+	HOSTTARGET,
+	CLEARCHAT //confirm ?? 
 	};
 
 class Message

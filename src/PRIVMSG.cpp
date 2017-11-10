@@ -22,7 +22,7 @@ PRIVMSG::PRIVMSG(string _raw_msg)
 
     getline(ss, s, '=');
     getline(ss, s, ';'); 
-    badges = s;
+    badges = new Badges(s);
 
     getline(ss, s, '=');
 
@@ -117,6 +117,7 @@ PRIVMSG::PRIVMSG(string _raw_msg)
 
 PRIVMSG::~PRIVMSG()
 {
+    delete badges;
 }
 
 string PRIVMSG::getSendString()
@@ -127,13 +128,53 @@ string PRIVMSG::getSendString()
 
 string PRIVMSG::getPrintString()
 {
-    return display_name + ": " + msg;
+    string to_return = "";
+    if(badges->isAdmin())
+	to_return += "[A]";
+    if(badges->isBits())
+    {
+	to_return += "[Bits";
+	to_return += to_string(badges->getBits());
+	to_return += "]";
+    }
+    if(badges->isBroadcaster())
+	to_return += "[B]";
+    if(badges->isGlobal_mod())
+	to_return += "[G]";
+    if(badges->isModerator())
+	to_return += "[M]";
+    if(badges->isSubscriber())
+    {
+	to_return += "[Sub";
+	int submonths = badges->getSubMonths();
+	if(submonths != -1)
+	    to_return += to_string(submonths);
+	to_return += "]";
+    }
+    if(badges->isStaff())
+	to_return += "[S]";
+    if(badges->isTurbo())
+	to_return += "[T]";
+    if(badges->isPremium())
+	to_return += "[P]";
+    if(badges->isPartner())
+	to_return += "[Partner]";
+    if(badges->isGlhf_pledge())
+	to_return += "[GLHF]";
+    
+    if(badges->getStr() != "")
+	to_return += " ";
+
+    to_return += display_name + ": " + msg;
+
+    return to_return;
 }
 
 void PRIVMSG::print_contents()
 {
     
-    cout << "badges = " << badges 
+    cout << "badges = " << badges->getStr() 
+	 << "\nbadges->isPremium() = " << badges->isPremium()
 	 << "\nbits = " << bits 
 	 << "\ncolor = " << color 
 	 << "\ndisplay-name = " << display_name 
