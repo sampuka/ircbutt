@@ -6,6 +6,7 @@
 #include "PART.hpp"
 #include "MODE.hpp"
 #include "USERSTATE.hpp"
+#include "ROOMSTATE.hpp"
 
 #include <string>
 #include <sstream>
@@ -18,7 +19,7 @@ Instance::Instance()
 {
     sock = new MSocket;
     msg_list = {}; //Can delete if confirmed that vectors start empty
-    list_busy = 0;
+    list_busy = false;
 }
 
 Instance::~Instance()
@@ -84,7 +85,7 @@ void Instance::interpret_msg(string msg)
 	
 	while(list_busy)
 	    ;
-	list_busy = 1;
+	list_busy = true;
     
     
 	if(s == "PING :tmi.twitch.tv")
@@ -104,11 +105,14 @@ void Instance::interpret_msg(string msg)
 	
 	else if (s.find(":tmi.twitch.tv USERSTATE ") != string::npos)
 	    msg_list.push_back(new USERSTATE(s));
+	
+	else if (s.find(":tmi.twitch.tv ROOMSTATE ") != string::npos)
+	    msg_list.push_back(new ROOMSTATE(s));
 
 	else
 	    cout << "!!!\"" << s << "\"" << endl;
 
-	list_busy = 0;
+	list_busy = false;
     }
 }
 
@@ -122,10 +126,10 @@ void Instance::handle_loop()
 	{
 	    while(list_busy)
 		;
-	    list_busy = 1;
+	    list_busy = true;
 	    msg = msg_list.back();
 	    msg_list.pop_back();
-	    list_busy = 0;
+	    list_busy = false;
 	    
 	    switch(msg->getMessageType())
 	    {
@@ -155,6 +159,11 @@ void Instance::handle_loop()
 		break;
 
 	    case MessageType::USERSTATE:
+		sock->Msend(msg->getSendString());
+		cout << msg->getPrintString() << endl;
+		break;
+
+	    case MessageType::ROOMSTATE:
 		sock->Msend(msg->getSendString());
 		cout << msg->getPrintString() << endl;
 		break;

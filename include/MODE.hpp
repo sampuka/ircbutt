@@ -1,3 +1,6 @@
+#ifndef MODE_H
+#define MODE_H
+
 #include "Message.hpp"
 
 #include <string>
@@ -15,3 +18,5 @@ private:
     std::string mode;
     std::string username;
 };
+
+#endif

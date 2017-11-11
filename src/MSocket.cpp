@@ -65,13 +65,13 @@ string MSocket::Mrecv()
     
     while(to_return.substr(to_return.length()-2, 2) != "\r\n")
     {
-	cout << "???" << recv_buffer << endl;
-	cout << "##################################### " << to_return.substr(to_return.length()-2, 2) << endl;
+	//cout << "???" << recv_buffer << endl;
+	//cout << "##################################### " << to_return.substr(to_return.length()-2, 2) << endl;
 	bytes_read = recv(sockfd, recv_buffer, 99950, 0);
 	recv_buffer[bytes_read] = '\0';
-	cout << "to_return " << to_return.length() << " -> ";
+	//cout << "to_return " << to_return.length() << " -> ";
 	to_return += recv_buffer;
-	cout << to_return.length() << endl;
+	//cout << to_return.length() << endl;
     }
     
 
