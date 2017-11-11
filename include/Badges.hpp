@@ -21,7 +21,8 @@ public:
     int getSubMonths();
     bool isStaff();
     bool isTurbo();
-    bool isPremium(); //NOT IN DOCUMENTATION???
+    //Not in documentation?
+    bool isPremium(); 
     bool isPartner();
     bool isGlhf_pledge();
     
