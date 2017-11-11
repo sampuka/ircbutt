@@ -11,6 +11,7 @@ class PRIVMSG: public Message
 public:
     PRIVMSG(std::string _raw_msg);
     ~PRIVMSG();
+
     std::string getSendString() override;
     std::string getPrintString() override;
 

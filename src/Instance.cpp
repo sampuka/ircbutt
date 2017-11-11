@@ -5,6 +5,7 @@
 #include "JOIN.hpp"
 #include "PART.hpp"
 #include "MODE.hpp"
+#include "USERSTATE.hpp"
 
 #include <string>
 #include <sstream>
@@ -100,6 +101,9 @@ void Instance::interpret_msg(string msg)
 
         else if(s.find(":jtv MODE ") != string::npos)
 	    msg_list.push_back(new MODE(s));
+	
+	else if (s.find(":tmi.twitch.tv USERSTATE ") != string::npos)
+	    msg_list.push_back(new USERSTATE(s));
 
 	else
 	    cout << "!!!\"" << s << "\"" << endl;
@@ -146,6 +150,11 @@ void Instance::handle_loop()
 		break;
 
 	    case MessageType::MODE:
+		sock->Msend(msg->getSendString());
+		cout << msg->getPrintString() << endl;
+		break;
+
+	    case MessageType::USERSTATE:
 		sock->Msend(msg->getSendString());
 		cout << msg->getPrintString() << endl;
 		break;

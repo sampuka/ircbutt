@@ -10,6 +10,7 @@ public:
     ~Badges();
 
     std::string getStr();
+    std::string getBadgeStr();
 
     bool isAdmin();
     bool isBits();

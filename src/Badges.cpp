@@ -3,7 +3,6 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <regex>
 
 using namespace std;
 
@@ -137,6 +136,49 @@ Badges::~Badges()
 string Badges::getStr()
 {
     return raw_str;
+}
+
+string Badges::getBadgeStr()
+{
+    string to_return = "";
+    if(isAdmin())
+	to_return += "[A]";
+    if(isBits())
+    {
+	to_return += "[Bits";
+	to_return += to_string(getBits());
+	to_return += "]";
+    }
+    if(isBroadcaster())
+	to_return += "[B]";
+    if(isGlobal_mod())
+	to_return += "[G]";
+    if(isModerator())
+	to_return += "[M]";
+    if(isSubscriber())
+    {
+	to_return += "[Sub";
+	int submonths = getSubMonths();
+	if(submonths != 0)
+	    to_return += to_string(submonths);
+	to_return += "]";
+    }
+    if(isStaff())
+	to_return += "[S]";
+    if(isTurbo())
+	to_return += "[T]";
+    if(isPremium())
+	to_return += "[P]";
+    if(isPartner())
+	to_return += "[Partner]";
+    if(isGlhf_pledge())
+	to_return += "[GLHF]";
+    
+    if(to_return != "")
+	to_return += " ";
+
+
+    return to_return;
 }
 
 bool Badges::isAdmin()

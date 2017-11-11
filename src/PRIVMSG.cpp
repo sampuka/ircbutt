@@ -128,6 +128,7 @@ string PRIVMSG::getSendString()
 
 string PRIVMSG::getPrintString()
 {
+/*
     string to_return = "";
     if(badges->isAdmin())
 	to_return += "[A]";
@@ -165,9 +166,18 @@ string PRIVMSG::getPrintString()
     if(badges->getStr() != "")
 	to_return += " ";
 
+    if(display_name == "")
+	cout << "NO DISPLAY-NAME PRIVMSG.cpp:169" << endl;
+
     to_return += display_name + ": " + msg;
 
     return to_return;
+*/
+
+    if(display_name == "")
+	cout << "NO DISPLAY-NAME PRIVMSG.cpp:178" << endl;
+
+    return badges->getBadgeStr() + display_name + ": " + msg;
 }
 
 void PRIVMSG::print_contents()
