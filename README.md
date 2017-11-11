@@ -1,5 +1,5 @@
 # ircbutt
-Attempt to make a proper bot for Twitch that handles all types of messages, OO-style in C++ (no bulli)
+Attempt to make a proper bot for Twitch that handles all types of messages, OO-style in C++ (name subject to change)
 
 # Accumulated list of places where the documentation is missing or wrong
 <b>PRIVMSG with Tags:</b>
@@ -8,9 +8,10 @@ Attempt to make a proper bot for Twitch that handles all types of messages, OO-s
 2. No mention of optional parameter emote-only
 3. No mention of optional parameter sent-ts
 
-Badges:
+<b>Badges:</b>
 
 1. No mention of following badges: 'premium', 'partner' or 'glhf-pledge'
+2. Would be nice to know 'subscriber' can be '0' even for subscribers
 
 # Troubleshooting:
 1. If you cant compile make sure the folder /src/obj/ exists
