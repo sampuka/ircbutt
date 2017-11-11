@@ -15,7 +15,7 @@ int main()
     
     cin >> x;
 
-    irc.join("#rockleesmile");
+    irc.join("#ppomodoli");
     
     cin >> x;
 

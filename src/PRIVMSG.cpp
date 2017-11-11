@@ -147,7 +147,7 @@ string PRIVMSG::getPrintString()
     {
 	to_return += "[Sub";
 	int submonths = badges->getSubMonths();
-	if(submonths != -1)
+	if(submonths != 0)
 	    to_return += to_string(submonths);
 	to_return += "]";
     }

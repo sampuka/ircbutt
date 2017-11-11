@@ -33,7 +33,7 @@ private:
     int broadcaster;
     int global_mod;
     int moderator;
-    std::string subscriber;
+    int subscriber;
     int staff;
     int turbo;
     int premium;

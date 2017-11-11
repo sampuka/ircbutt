@@ -16,7 +16,7 @@ Badges::Badges(string _raw_str)
     broadcaster = 0;
     global_mod = 0;
     moderator = 0;
-    subscriber = "";
+    subscriber = -1;
     staff = 0;
     turbo = 0;
     premium = 0;
@@ -77,7 +77,7 @@ Badges::Badges(string _raw_str)
 	}
         else if(badge_str == "subscriber")
 	{
-	    subscriber = version_str;
+	    subscriber = stoi(version_str);
 	    //cout << "subscriber matched with " << subMonths << " months" << endl;
 	}
         else if(badge_str == "staff")
@@ -171,13 +171,13 @@ bool Badges::isModerator()
 
 bool Badges::isSubscriber()
 {
-    return subscriber != "";
+    return subscriber >= 0;
 }
 
 int Badges::getSubMonths()
 {
-    if(isSubscriber() && subscriber != "0")
-	return stoi(subscriber);
+    if(isSubscriber())
+	return subscriber;
     else
 	return -1;
 }
