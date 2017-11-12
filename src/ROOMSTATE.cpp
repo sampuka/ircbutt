@@ -2,6 +2,7 @@
 
 #include <string>
 #include <sstream>
+#include <iostream>
 
 using namespace std;
 
@@ -102,4 +103,19 @@ string ROOMSTATE::getPrintString()
 	to_return += "\nSubs only";
 
     return to_return + "\n---";
+}
+
+void ROOMSTATE::update(map<string, Channel*>* channel_list)
+{
+    //cout << "ROOMSTATE::update called" << endl;
+    Channel* chan = (*channel_list)[channel];
+
+    chan->setBroadcaster_lang(broadcaster_lang);
+    chan->setEmote_only(emote_only);
+    chan->setFollowers_only(followers_only);
+    chan->setMercury(mercury);
+    chan->setR9k(r9k);
+    chan->setRoom_id(room_id);
+    chan->setSlow(slow);
+    chan->setSubs_only(subs_only);
 }

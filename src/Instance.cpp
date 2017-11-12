@@ -1,4 +1,5 @@
 #include "Instance.hpp"
+#include "Channel.hpp"
 
 #include "PING.hpp"
 #include "PRIVMSG.hpp"
@@ -44,6 +45,7 @@ void Instance::login()
 void Instance::join(string channel)
 {
     sock->Msend("JOIN " + channel);
+    channel_list[channel] = new Channel(channel);
 }
 
 void Instance::getCapabilities()
@@ -65,7 +67,6 @@ void Instance::main_loop()
 	interpret_msg(recv_string);
 	recv_string = "";
     }
-    
 }
 
 void Instance::interpret_msg(string msg)
@@ -139,33 +140,43 @@ void Instance::handle_loop()
 		break;
 
 	    case MessageType::PRIVMSG:
-		sock->Msend(msg->getSendString());
+		//sock->Msend(msg->getSendString());
 		cout << msg->getPrintString() << endl;
 		break;
 
 	    case MessageType::JOIN:
-		sock->Msend(msg->getSendString());
+		//sock->Msend(msg->getSendString());
 		cout << msg->getPrintString() << endl;
 		break;
 
 	    case MessageType::PART:
-		sock->Msend(msg->getSendString());
+		//sock->Msend(msg->getSendString());
 		cout << msg->getPrintString() << endl;
 		break;
 
 	    case MessageType::MODE:
-		sock->Msend(msg->getSendString());
+		//sock->Msend(msg->getSendString());
 		cout << msg->getPrintString() << endl;
 		break;
 
 	    case MessageType::USERSTATE:
-		sock->Msend(msg->getSendString());
+		//sock->Msend(msg->getSendString());
 		cout << msg->getPrintString() << endl;
+		msg->update(&channel_list);
+
+		//cout << "channel: " << channel_list["#alkaizerx"]->getDisplay_name() << endl;
+		cout << "My badges: " << channel_list["#alkaizerx"]->getBadges()->getBadgeStr() << endl;
 		break;
 
 	    case MessageType::ROOMSTATE:
-		sock->Msend(msg->getSendString());
+		//sock->Msend(msg->getSendString());
 		cout << msg->getPrintString() << endl;
+		msg->update(&channel_list);
+		
+/*
+		cout << "channel: " << channel_list["#alkaizerx"]->getBroadcaster_lang() << endl;
+		cout << "channel: " << channel_list["#alkaizerx"]->getRoom_id() << endl;
+*/
 		break;
 
 	    default:

@@ -86,6 +86,20 @@ string USERSTATE::getPrintString()
     return to_return + "\n---";
 }
 
+void USERSTATE::update(map<string, Channel*>* channel_list)
+{
+    //cout << "USERSTATE::update called" << endl;
+    Channel* chan = (*channel_list)[channel];
+
+    chan->setBadges(badges->getStr());
+    chan->setColor(color);
+    chan->setDisplay_name(display_name);
+    chan->setEmote_sets(emote_sets);
+    chan->setMod(mod);
+    chan->setSubscriber(subscriber);
+    chan->setUser_type(user_type);
+}
+
 void USERSTATE::print_contents()
 {
     cout << "\nbadges = " << badges->getStr() << " = " << badges->getBadgeStr()
@@ -97,4 +111,4 @@ void USERSTATE::print_contents()
 	 << "\nuser-type = " << user_type
 	 << "\nchannel = " << channel
 	 << endl;
-	}
+}

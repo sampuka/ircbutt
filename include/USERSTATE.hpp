@@ -15,6 +15,8 @@ public:
     std::string getSendString() override;
     std::string getPrintString() override;
 
+    void update(std::map<std::string, Channel*>* channel_list) override;
+
 private:
     void print_contents();
     Badges* badges;

@@ -14,6 +14,8 @@ public:
     std::string getSendString() override;
     std::string getPrintString() override;
 
+    void update(std::map<std::string, Channel*>* channel_list) override;
+
 private:
     std::string broadcaster_lang;
     std::string emote_only;
@@ -24,7 +26,6 @@ private:
     std::string slow;
     std::string subs_only;
     std::string channel;
-
 };
 
 #endif

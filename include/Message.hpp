@@ -1,7 +1,10 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
+#include "Channel.hpp"
+
 #include <string>
+#include <map>
 
 //https://tools.ietf.org/html/rfc1459.html#section-4
 enum class MessageType
@@ -59,9 +62,12 @@ class Message
 {
 public:
     //Message();
-    virtual ~Message();
+    virtual ~Message() = 0;
     virtual std::string getSendString() = 0;
     virtual std::string getPrintString() = 0;
+
+    virtual void update(std::map<std::string, Channel*>* channel_list);
+
     MessageType getMessageType();
     std::string getMsg();
 
