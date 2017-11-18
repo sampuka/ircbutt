@@ -5,7 +5,7 @@
 
 using namespace std;
 
-vector<string> login_files = {"bot_of_all_trades"};
+vector<string> login_files = {"bot_of_all_trades", "marilynjakbo"};
 
 int main()
 {
@@ -22,8 +22,13 @@ int main()
     cin >> x;
 
     for(Instance* instance : instances)
-	instance->join("#followgrubby");
+	instance->join("#mcmattness");
     
+    cin >> x;
+
+    for(Instance* instance : instances)
+	instance->send_privmsg("test string", "#mcmattness");
+
     cin >> x;
 
     return 0;

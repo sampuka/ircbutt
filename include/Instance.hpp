@@ -18,6 +18,8 @@ public:
     void login(std::string login_file);
     void join(std::string channel);
     void getCapabilities();
+
+    void send_privmsg(std::string msg, std::string channel);
     
 private:
     void main_loop();

@@ -41,7 +41,7 @@ void Instance::login(string login_file)
     string name;
     
     ifile.open(login_file);
-    getline(ifile, name, '\n');
+    getline(ifile, name);
     getline(ifile, oauth);
 
     //Login
@@ -64,6 +64,16 @@ void Instance::getCapabilities()
     sock->Msend("CAP REQ :twitch.tv/membership");
     sock->Msend("CAP REQ :twitch.tv/tags");
     sock->Msend("CAP REQ :twitch.tv/commands");
+}
+
+//Should return error value etc.
+void Instance::send_privmsg(string msg, string channel)
+{
+    Channel* chan = channel_list[channel];
+
+    //Should check for ability to msg
+
+    sock->Msend("PRIVMSG " + channel + " :" + msg);
 }
 
 void Instance::main_loop()
