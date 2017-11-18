@@ -13,6 +13,7 @@
 #include <sstream>
 #include <iostream>
 #include <thread>
+#include <fstream>
 
 using namespace std;
 
@@ -30,13 +31,22 @@ Instance::~Instance()
     delete handle_loop_thread;
 }
 
-void Instance::login()
+void Instance::login(string login_file)
 {
     sock->init();
 
+    //Open login file
+    ifstream ifile;
+    string oauth;
+    string name;
+    
+    ifile.open(login_file);
+    getline(ifile, name, '\n');
+    getline(ifile, oauth);
+
     //Login
-    sock->Msend("PASS oauth:zmff7qlqdjxpqs54r3lf4ga5xhlr51");
-    sock->Msend("NICK bot_of_all_trades");
+    sock->Msend("PASS " + oauth);
+    sock->Msend("NICK " + name);
 
     main_loop_thread = new thread(&Instance::main_loop, this);
     handle_loop_thread = new thread(&Instance::handle_loop, this);
@@ -46,6 +56,7 @@ void Instance::join(string channel)
 {
     sock->Msend("JOIN " + channel);
     channel_list[channel] = new Channel(channel);
+    getCapabilities();
 }
 
 void Instance::getCapabilities()

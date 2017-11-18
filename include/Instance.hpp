@@ -15,7 +15,7 @@ class Instance
 public:
     Instance();
     ~Instance();
-    void login();
+    void login(std::string login_file);
     void join(std::string channel);
     void getCapabilities();
     
