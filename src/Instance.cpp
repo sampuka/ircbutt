@@ -176,7 +176,7 @@ void Instance::handle_loop()
 		msg->update(&channel_list);
 
 		//cout << "channel: " << channel_list["#alkaizerx"]->getDisplay_name() << endl;
-		cout << "My badges: " << channel_list["#alkaizerx"]->getBadges()->getBadgeStr() << endl;
+		//cout << "My badges: " << channel_list["#alkaizerx"]->getBadges()->getBadgeStr() << endl;
 		break;
 
 	    case MessageType::ROOMSTATE:
