@@ -6,6 +6,8 @@
 #include <string>
 #include <map>
 
+#include "Channel.hpp"
+
 //https://tools.ietf.org/html/rfc1459.html#section-4
 enum class MessageType
 {
@@ -63,7 +65,8 @@ class Message
 public:
     //Message();
     virtual ~Message() = 0;
-    virtual std::string getSendString() = 0;
+    virtual std::string should_reply();
+    virtual std::string getSendString(Channel* chan);
     virtual std::string getPrintString() = 0;
 
     virtual void update(std::map<std::string, Channel*>* channel_list);

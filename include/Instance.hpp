@@ -20,12 +20,15 @@ public:
     void getCapabilities();
 
     void send_privmsg(std::string msg, std::string channel);
+    void send_privmsg(std::string msg, Channel* chan);
     
 private:
     void main_loop();
     void interpret_msg(std::string msg);
 
     void handle_loop();
+
+    void reply_for(Message* msg);
 
     std::vector<Message*> msg_list;
     bool list_busy; //Bool value to indicate a thread is working on the list. To avoid multiple threads working on the list at the same time.
@@ -34,10 +37,6 @@ private:
 
     std::thread *main_loop_thread;
     std::thread *handle_loop_thread;
-
-    //std::string login_name;
-    //std::string login_OAuth;
-
     MSocket *sock;
 };
 

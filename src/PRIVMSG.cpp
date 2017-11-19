@@ -120,7 +120,14 @@ PRIVMSG::~PRIVMSG()
     delete badges;
 }
 
-string PRIVMSG::getSendString()
+string PRIVMSG::should_reply()
+{
+    //Find out if there should be a reply to the received PRIVMSG
+    //Fx checking if the message starts with !uptime etc.
+    return "";
+}
+
+string PRIVMSG::getSendString(Channel* chan)
 {
     //Do stuff here
     return "";

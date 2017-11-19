@@ -41,6 +41,8 @@ void Instance::login(string login_file)
     string name;
     
     ifile.open(login_file);
+    //Error if file doesn't open/exist
+    
     getline(ifile, name);
     getline(ifile, oauth);
 
@@ -74,6 +76,11 @@ void Instance::send_privmsg(string msg, string channel)
     //Should check for ability to msg
 
     sock->Msend("PRIVMSG " + channel + " :" + msg);
+}
+
+void Instance::send_privmsg(string msg, Channel* chan)
+{
+    sock->Msend("PRIVMSG " + chan->getChannel() + " :" + msg);
 }
 
 void Instance::main_loop()
@@ -156,7 +163,7 @@ void Instance::handle_loop()
 	    switch(msg->getMessageType())
 	    {
 	    case MessageType::PING:
-		sock->Msend(msg->getSendString());
+		reply_for(msg);
 		cout << msg->getPrintString() << endl;
 		break;
 
@@ -209,3 +216,18 @@ void Instance::handle_loop()
     }
 }
 
+void Instance::reply_for(Message* msg)
+{
+    string channel = msg->should_reply();
+    if(channel == "")
+	;
+    
+    else if(channel == "to server")
+        sock->Msend(msg->getSendString(NULL));
+    
+    else
+    {
+        Channel *chan = channel_list[channel];
+	send_privmsg(msg->getSendString(chan), chan);
+    }
+}

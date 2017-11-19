@@ -5,6 +5,8 @@
 
 using namespace std;
 
+//#DEFINE VERBOSE 1
+
 vector<string> login_files = {"bot_of_all_trades", "marilynjakbo", "lostthesea"};
 
 int main()

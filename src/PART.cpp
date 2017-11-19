@@ -26,12 +26,12 @@ PART::PART(string _raw_msg)
 PART::~PART()
 {
 }
-
+/*
 string PART::getSendString()
 {
     return "";
 }
-
+*/
 string PART::getPrintString()
 {
     return username + " left " + channel;

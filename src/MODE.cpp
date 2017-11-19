@@ -28,12 +28,12 @@ MODE::MODE(string _raw_msg)
 MODE::~MODE()
 {
 }
-
+/*
 string MODE::getSendString()
 {
     return "";
 }
-
+*/
 string MODE::getPrintString()
 {
     return username + " got " + mode + " in " + channel;

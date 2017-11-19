@@ -9,6 +9,16 @@ Message::~Message()
 {
 }
 
+string Message::should_reply()
+{
+    return "";
+}
+
+string Message::getSendString(Channel* chan)
+{
+    return "";
+}
+
 MessageType Message::getMessageType()
 {
     return msg_type;

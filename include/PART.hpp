@@ -10,7 +10,7 @@ class PART: public Message
 public:
     PART(std::string);
     ~PART() override;
-    std::string getSendString() override;
+    
     std::string getPrintString() override;
     
 private:

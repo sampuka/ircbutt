@@ -11,7 +11,6 @@ public:
     ROOMSTATE(std::string _raw_msg);
     ~ROOMSTATE() override;
 
-    std::string getSendString() override;
     std::string getPrintString() override;
 
     void update(std::map<std::string, Channel*>* channel_list) override;

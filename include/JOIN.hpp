@@ -10,7 +10,7 @@ class JOIN: public Message
 public:
     JOIN(std::string _raw_msg);
     ~JOIN() override;
-    std::string getSendString() override;
+    
     std::string getPrintString() override;
 
 private:
