@@ -1,6 +1,10 @@
 # ircbutt
 Attempt to make a proper bot for Twitch that handles all types of messages, OO-style in C++ (name subject to change)
 
+# Usage
+Login information for account <name> should be in login_<name>.txt. First line should be <name> and second line should be the oauth which can be found (Hint: Google).
+As of now, the login files to be used are defined in the login_files variable in ircbutt.cpp
+
 # Accumulated list of places where the documentation is missing or wrong
 <b>PRIVMSG with Tags:</b>
 

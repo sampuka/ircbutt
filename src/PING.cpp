@@ -13,7 +13,12 @@ PING::~PING()
 {
 }
 
-string PING::getSendString()
+string PING::should_reply()
+{
+    return "to server";
+}
+
+string PING::getSendString(Channel* chan)
 {
     return "PONG :tmi.twitch.tv";
 }

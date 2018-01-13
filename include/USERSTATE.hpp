@@ -12,7 +12,6 @@ public:
     USERSTATE(std::string _raw_msg);
     ~USERSTATE() override;
 
-    std::string getSendString() override;
     std::string getPrintString() override;
 
     void update(std::map<std::string, Channel*>* channel_list) override;

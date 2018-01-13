@@ -12,7 +12,8 @@ public:
     PRIVMSG(std::string _raw_msg);
     ~PRIVMSG();
 
-    std::string getSendString() override;
+    std::string should_reply() override;
+    std::string getSendString(Channel* chan) override;
     std::string getPrintString() override;
 
 private:

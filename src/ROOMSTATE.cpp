@@ -55,12 +55,12 @@ ROOMSTATE::ROOMSTATE(string _raw_msg)
 ROOMSTATE::~ROOMSTATE()
 {
 }
-
+/*
 string ROOMSTATE::getSendString()
 {
     return "";
 }
-
+*/
 string ROOMSTATE::getPrintString()
 {
     string to_return = "---\nRoomstate for " + channel;

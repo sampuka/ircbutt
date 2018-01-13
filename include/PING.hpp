@@ -11,7 +11,9 @@ class PING: public Message
 public:
     PING(std::string _raw_msg);
     ~PING() override;
-    std::string getSendString() override;
+
+    std::string should_reply() override;
+    std::string getSendString(Channel* chan) override;
     std::string getPrintString() override;
     
 private:

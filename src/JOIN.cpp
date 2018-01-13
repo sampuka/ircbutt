@@ -27,12 +27,17 @@ JOIN::JOIN(string _raw_msg)
 JOIN::~JOIN()
 {
 }
+/*
+string JOIN::should_reply()
+{
+    return "";
+}
 
 string JOIN::getSendString()
 {
     return "";
 }
-
+*/
 string JOIN::getPrintString()
 {
     return username + " joined " + channel;

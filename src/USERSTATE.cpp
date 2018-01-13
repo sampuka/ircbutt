@@ -54,12 +54,12 @@ USERSTATE::~USERSTATE()
 {
     delete badges;
 }
-
+/*
 string USERSTATE::getSendString()
 {
     return "";
 }
-
+*/
 string USERSTATE::getPrintString()
 {
     string to_return = "---\nUserstate for " + display_name + " in " + channel + ": ";

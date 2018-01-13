@@ -13,6 +13,7 @@
 #include <sstream>
 #include <iostream>
 #include <thread>
+#include <fstream>
 
 using namespace std;
 
@@ -30,13 +31,24 @@ Instance::~Instance()
     delete handle_loop_thread;
 }
 
-void Instance::login()
+void Instance::login(string login_file)
 {
     sock->init();
 
+    //Open login file
+    ifstream ifile;
+    string oauth;
+    string name;
+    
+    ifile.open(login_file);
+    //Error if file doesn't open/exist
+    
+    getline(ifile, name);
+    getline(ifile, oauth);
+
     //Login
-    sock->Msend("PASS oauth:zmff7qlqdjxpqs54r3lf4ga5xhlr51");
-    sock->Msend("NICK bot_of_all_trades");
+    sock->Msend("PASS " + oauth);
+    sock->Msend("NICK " + name);
 
     main_loop_thread = new thread(&Instance::main_loop, this);
     handle_loop_thread = new thread(&Instance::handle_loop, this);
@@ -46,6 +58,7 @@ void Instance::join(string channel)
 {
     sock->Msend("JOIN " + channel);
     channel_list[channel] = new Channel(channel);
+    getCapabilities();
 }
 
 void Instance::getCapabilities()
@@ -53,6 +66,21 @@ void Instance::getCapabilities()
     sock->Msend("CAP REQ :twitch.tv/membership");
     sock->Msend("CAP REQ :twitch.tv/tags");
     sock->Msend("CAP REQ :twitch.tv/commands");
+}
+
+//Should return error value etc.
+void Instance::send_privmsg(string msg, string channel)
+{
+    Channel* chan = channel_list[channel];
+
+    //Should check for ability to msg
+
+    sock->Msend("PRIVMSG " + channel + " :" + msg);
+}
+
+void Instance::send_privmsg(string msg, Channel* chan)
+{
+    sock->Msend("PRIVMSG " + chan->getChannel() + " :" + msg);
 }
 
 void Instance::main_loop()
@@ -135,7 +163,7 @@ void Instance::handle_loop()
 	    switch(msg->getMessageType())
 	    {
 	    case MessageType::PING:
-		sock->Msend(msg->getSendString());
+		reply_for(msg);
 		cout << msg->getPrintString() << endl;
 		break;
 
@@ -165,7 +193,7 @@ void Instance::handle_loop()
 		msg->update(&channel_list);
 
 		//cout << "channel: " << channel_list["#alkaizerx"]->getDisplay_name() << endl;
-		cout << "My badges: " << channel_list["#alkaizerx"]->getBadges()->getBadgeStr() << endl;
+		//cout << "My badges: " << channel_list["#alkaizerx"]->getBadges()->getBadgeStr() << endl;
 		break;
 
 	    case MessageType::ROOMSTATE:
@@ -188,3 +216,18 @@ void Instance::handle_loop()
     }
 }
 
+void Instance::reply_for(Message* msg)
+{
+    string channel = msg->should_reply();
+    if(channel == "")
+	;
+    
+    else if(channel == "to server")
+        sock->Msend(msg->getSendString(NULL));
+    
+    else
+    {
+        Channel *chan = channel_list[channel];
+	send_privmsg(msg->getSendString(chan), chan);
+    }
+}

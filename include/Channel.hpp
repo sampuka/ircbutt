@@ -35,6 +35,8 @@ public:
     std::string getSubs_only();
     void setSubs_only(std::string _subs_only);
 
+    std::string getChannel();
+
     Badges* getBadges();
     void setBadges(std::string badgeStr);
 

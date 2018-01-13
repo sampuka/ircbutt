@@ -113,6 +113,11 @@ void Channel::setSubs_only(std::string _subs_only)
     subs_only = _subs_only;
 }
 
+string Channel::getChannel()
+{
+    return channel;
+}
+
 Badges* Channel::getBadges()
 {
     return badges;
